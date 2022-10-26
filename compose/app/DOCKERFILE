@@ -1,0 +1,15 @@
+FROM python:3
+
+WORKDIR /posts/
+
+# Install requirements
+COPY compose/app/requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install psycopg2
+
+# Copy project
+COPY . .
+
+# Run main process
+RUN ls
+CMD ["python", "main.py"]

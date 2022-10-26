@@ -4,6 +4,6 @@ router = APIRouter()
 
 
 # Routes
-@router.get('/')
-def hi():
+@router.get('/hello')
+def hello():
     return "Hi"
