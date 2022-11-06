@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 # SQLAlchemy
 from sqlalchemy.orm import Session
+from sqlalchemy import update
 
 # FastAPI
 from fastapi.encoders import jsonable_encoder
@@ -43,9 +44,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         object = self.model(**jsonable_encoder(object))
         session.add(object)
         session.commit()
-        session.refresh()
+        session.refresh(object)
         return object
 
     def update(self, session: Session, object: UpdateSchemaType) -> ModelType:
-        ...
+        object = session.query(self.model).\
+            filter(object.id == self.model.id).update(**jsonable_encoder(object))
+        session.commit()
+        return object
 

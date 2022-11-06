@@ -1,2 +1,2 @@
-from src.schemas.posts import PostMixin, CreatePostSchema, ReturnPostSchema
-from src.schemas.users import LoginSchema, ReturnUserSchema, CreateAccountSchema
+from .posts import PostMixin, CreatePostSchema, ReturnPostSchema, UpdatePostSchema, crud_posts
+from .users import LoginSchema, ReturnUserSchema, CreateAccountSchema, UpdateUserSchema, crud_users

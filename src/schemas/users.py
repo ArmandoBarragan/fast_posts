@@ -1,5 +1,10 @@
+# Pydantic
 from pydantic import BaseModel
 from pydantic import Field
+
+# Project
+from src.db import CRUDBase
+from src.models import UserAccount
 
 
 class EmailMixin(BaseModel):
@@ -16,13 +21,27 @@ class UserMixin(EmailMixin):
 
 
 class CreateAccountSchema(UserMixin, PasswordMixin):
+    ...
+
+
+class ReturnUserSchema(UserMixin, EmailMixin):
+    id: int
+
+    class Config:
+        orm_mode=True
+
+class LoginSchema(EmailMixin, PasswordMixin):
+    ...
+
+
+class UpdateUserSchema(EmailMixin, UserMixin):
     class Config:
         orm_mode=True
 
 
-class ReturnUserSchema(UserMixin):
-    id: int
+class CRUDUserAccount(CRUDBase[UserAccount, CreateAccountSchema, UpdateUserSchema]):
+    """Inherits from CRUDBase to make UserAccounts operations"""
+    ...
 
 
-class LoginSchema(EmailMixin, PasswordMixin):
-    pass
+crud_users = CRUDUserAccount(UserAccount)

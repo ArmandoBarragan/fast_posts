@@ -9,7 +9,6 @@ from sqlalchemy.dialects.postgresql import TEXT
 # Project
 from src.settings import Base
 
-
 class Post(Base):
     """ Post model"""
     __tablename__ = 'posts'
@@ -18,3 +17,4 @@ class Post(Base):
     title = Column(String(200))
     content = Column(TEXT)
     author_pk = Column(Integer, ForeignKey('user_accounts.id'))
+
