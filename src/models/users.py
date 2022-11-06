@@ -1,10 +1,16 @@
-from sqlalchemy import String, Integer, Column, ForeignKey, Boolean
+# SQLAlchemy
+from sqlalchemy import String
+from sqlalchemy import Integer
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Boolean
 
-from src.settings.settings import Base
-
+# Project
+from src.settings import Base
 
 
 class UserAccount(Base):
+    """ User model"""
     __tablename__ = 'user_accounts'
 
     id = Column(Integer, primary_key=True)

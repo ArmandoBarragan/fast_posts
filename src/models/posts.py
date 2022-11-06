@@ -1,9 +1,17 @@
-from sqlalchemy import String, Integer, Column, ForeignKey, Boolean
+# SQLAlchemy
+from sqlalchemy import String
+from sqlalchemy import Integer
+from sqlalchemy import Column
+from sqlalchemy import ForeignKey
+from sqlalchemy import Boolean
 from sqlalchemy.dialects.postgresql import TEXT
-from src.settings.settings import Base
+
+# Project
+from src.settings import Base
 
 
 class Post(Base):
+    """ Post model"""
     __tablename__ = 'posts'
 
     id = Column(Integer, primary_key=True)

@@ -2,6 +2,7 @@ import os
 from sqlalchemy.ext.declarative import declarative_base
 
 
+# Server settings
 HOST = os.getenv('HOST', default='0.0.0.0')
 PORT = os.getenv('PORT', default=8000)
 DEBUG = os.getenv('DEBUG', default=False)
