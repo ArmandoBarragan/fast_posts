@@ -5,7 +5,8 @@ from fastapi import APIRouter
 from src.schemas import crud_posts
 from src.schemas import CreatePostSchema
 from src.schemas import ReturnPostSchema
-from src.schemas import Post
+from src.schemas import UpdatePostSchema
+
 
 router = APIRouter()
 
