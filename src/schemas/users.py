@@ -21,27 +21,28 @@ class UserMixin(EmailMixin):
 
 
 class CreateAccountSchema(UserMixin, PasswordMixin):
-    ...
+    pass
 
 
-class ReturnUserSchema(UserMixin, EmailMixin):
+class ReturnUserSchema(UserMixin):
     id: int
 
     class Config:
         orm_mode=True
 
 class LoginSchema(EmailMixin, PasswordMixin):
-    ...
+    pass
 
 
-class UpdateUserSchema(EmailMixin, UserMixin):
+class UpdateUserSchema(UserMixin):
+    id: int
     class Config:
         orm_mode=True
 
 
 class CRUDUserAccount(CRUDBase[UserAccount, CreateAccountSchema, UpdateUserSchema]):
     """Inherits from CRUDBase to make UserAccounts operations"""
-    ...
+    pass
 
 
 crud_users = CRUDUserAccount(UserAccount)

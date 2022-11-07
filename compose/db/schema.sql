@@ -1,7 +1,7 @@
 \c fast_posts
 
 CREATE TABLE user_accounts (
-    id INT,
+    id SERIAL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(60) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE user_accounts (
 
 
 CREATE TABLE posts (
-    id INT,
+    id SERIAL,
     title VARCHAR(200) NULL,
     content TEXT NOT NULL,
     author_pk INT NOT NULL,

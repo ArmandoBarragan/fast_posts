@@ -49,7 +49,8 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     def update(self, session: Session, object: UpdateSchemaType) -> ModelType:
         object = session.query(self.model).\
-            filter(object.id == self.model.id).update(**jsonable_encoder(object))
+            filter(self.model.id == object.id).update({**jsonable_encoder(object)})
         session.commit()
+        session.refresh(object)
         return object
 

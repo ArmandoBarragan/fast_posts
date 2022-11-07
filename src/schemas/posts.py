@@ -13,7 +13,7 @@ class PostMixin(BaseModel):
 
 
 class CreatePostSchema(PostMixin):
-    ...
+    pass
 
 
 class UpdatePostSchema(PostMixin):
@@ -31,7 +31,7 @@ class ReturnPostSchema(PostMixin):
 
 class CRUDPost(CRUDBase[Post, CreatePostSchema, UpdatePostSchema]):
     """Inherits from CRUDBasee to make basic transactions for the Post class"""
-    ...
+    pass
 
 
 crud_posts = CRUDPost(Post)

@@ -11,21 +11,25 @@ from src.schemas import UpdatePostSchema
 router = APIRouter()
 
 
-@router.post('/posts/create')
+@router.post('/posts/create',
+             tags=['posts'])
 def create_post():
     return 'hi'
 
 
-@router.get('/posts/{post_id}')
+@router.get('/posts/{post_id}',
+            tags=['posts'])
 def post_detail(post_id: int):
     return 'hi'
 
 
-@router.patch('/posts/{post_id}')
+@router.patch('/posts/{post_id}',
+              tags=['posts'])
 def update_post(post_int: int):
     return 'hi'
 
 
-@router.delete('/posts/{post_id}')
+@router.delete('/posts/{post_id}',
+               tags=['posts'])
 def delete_post(post_id: int):
     return 'hi'
