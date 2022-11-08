@@ -16,8 +16,13 @@ router = APIRouter()
 # Routes
 @router.post('/users/create_account',
              tags=['auth'])
-def create_account():
-    return 'hi'
+def create_account(account: CreateAccountSchema):
+    """Create account:
+    Takes: CreateAccountSchema.
+    Returns: ReturnUserSchema"""
+    session = Session()
+    # TODO: Password Encryption, Validators
+    return crud_users.create(session=session, object=account)
 
 
 @router.get('/users/{user_id}',
