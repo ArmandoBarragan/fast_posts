@@ -1,3 +1,6 @@
+# FastAPI
+from fastapi import status
+
 # Pydantic
 from pydantic import BaseModel
 from pydantic import Field
@@ -42,7 +45,15 @@ class UpdateUserSchema(UserMixin):
 
 class CRUDUserAccount(CRUDBase[UserAccount, CreateAccountSchema, UpdateUserSchema]):
     """Inherits from CRUDBase to make UserAccounts operations"""
-    pass
+    def email_query(self, session, email) -> UserAccount:
+        """
+        Searches in the database if the user with the given email exists.
+        :param session: Session
+        :param email: Email from request (LoginSchema)
+        :return: UserAccount
+        """
+        account = session.query(UserAccount).filter(UserAccount.email == email).first()
+        return account
 
 
 crud_users = CRUDUserAccount(UserAccount)

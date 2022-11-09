@@ -35,22 +35,51 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     def get(self, session: Session, id: Any) -> Optional[ModelType]:
+        """
+        Returns an instance of the record that matches the id.
+        :param session: Session
+        :param id: int
+        :return: Model
+        """
         return session.query(self.model).filter(self.model.id == id).first()
 
     def all(self, session: Session) -> List[Any]:
+        """
+        Returns a list of all records in the table.
+        :param session: Session
+        :return: List[Model]
+        """
         return session.query(self.model).all()
 
     def create(self, session: Session, object: CreateSchemaType) -> ModelType:
+        """
+        Creates in the database a new record of the table and returns the object.
+        :param session: Session
+        :param object: CreateSchemaType
+        :return: Object
+        """
         object = self.model(**jsonable_encoder(object))
         session.add(object)
         session.commit()
         session.refresh(object)
         return object
 
-    def update(self, session: Session, object: UpdateSchemaType) -> ModelType:
-        object = session.query(self.model).\
+    def update(self, session: Session, object: UpdateSchemaType):
+        """
+        Takes an UpdateSchemaType object, updates the record and returns the refreshed object.
+        :param session: Session
+        :param object: UpdateSchemaType
+        :return: Model
+        """
+        session.query(self.model).\
             filter(self.model.id == object.id).update({**jsonable_encoder(object)})
         session.commit()
-        session.refresh(object)
-        return object
+
+        return self.get(session, object.id)
+
+    def delete(self, session: Session, id: int) -> str:
+        """Deletes a record that matches the id."""
+        session.query(self.model).filter(self.model.id == id).delete()
+        session.commit()
+        return "{} with id {} deleted".format(self.model, id)
 
