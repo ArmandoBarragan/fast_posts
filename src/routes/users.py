@@ -116,6 +116,9 @@ def update_user(update_object: UpdateUserSchema, password):
 
 
 @router.delete('/users/{user_id}',
-               tags=['auth'])
+               tags=['users'],
+               status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(user_id: int):
-    return 'hi'
+    with Session() as session:
+        delete_message = crud_users.delete(session, user_id)
+        return {"detail": delete_message}
